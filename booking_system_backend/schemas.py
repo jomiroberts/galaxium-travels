@@ -105,12 +105,12 @@ class RouteOut(BaseModel):
 
 
 class ItineraryCreate(BaseModel):
+    # Reject unknown fields so clients can't set server-owned values such as prices.
+    model_config = ConfigDict(extra="forbid")
+
     user_id: int
     name: str
     flight_ids: list[int]
-    # The front end echoes the price shown in search results. Module 7 of the
-    # Bob SDLC course audits and removes this client-trusted field; keep it here.
-    quoted_total_price: int | None = None
 
 
 class ItineraryLegOut(BaseModel):

@@ -155,5 +155,4 @@ export interface ItineraryRequest {
   user_id: number;
   name: string;
   flight_ids: number[];
-  quoted_total_price?: number;
 }

@@ -67,7 +67,6 @@ export const Trips = () => {
         user_id: user.user_id,
         name: user.name,
         flight_ids: route.legs.map((leg) => leg.flight_id),
-        quoted_total_price: route.total_price,
       });
       await confirmItinerary(held.itinerary_id);
       toast.success('Trip booked!');

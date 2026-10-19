@@ -269,9 +269,7 @@ def create_itinerary_endpoint(
 
     If any leg cannot be held, earlier holds are released and nothing is saved.
     """
-    result = itinerary.create_itinerary(
-        db, holds, request.user_id, request.name, request.flight_ids, request.quoted_total_price
-    )
+    result = itinerary.create_itinerary(db, holds, request.user_id, request.name, request.flight_ids)
     if isinstance(result, ErrorResponse):
         _raise_itinerary_error(result)
     return result

@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Trust Boundary Audit",
+          "informationUri": "https://owasp.org/www-project-application-security-verification-standard/",
+          "rules": [
+            {
+              "id": "ASVS-V5.1.2",
+              "shortDescription": {
+                "text": "Frameworks protect against mass parameter assignment."
+              }
+            },
+            {
+              "id": "ASVS-V5.1.3",
+              "shortDescription": {
+                "text": "All input is validated against an allow list."
+              }
+            },
+            {
+              "id": "ASVS-V11.1.4",
+              "shortDescription": {
+                "text": "The application limits excessive business requests."
+              }
+            },
+            {
+              "id": "ASVS-V11.1.5",
+              "shortDescription": {
+                "text": "The application has business logic limits that protect against likely abuse."
+              }
+            }
+          ]
+        }
+      },
+      "properties": {
+        "note": "STAND-IN: replace with the SARIF report from the module 7 authoring run."
+      },
+      "results": [
+        {
+          "ruleId": "ASVS-V11.1.5",
+          "level": "error",
+          "message": {
+            "text": "The server stores the client-supplied quoted_total_price as the itinerary's total price. Fix: compute the total from the flights' prices on the server."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "booking_system_backend/services/itinerary.py"
+                },
+                "region": {
+                  "startLine": 172
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "ASVS-V5.1.2",
+          "level": "error",
+          "message": {
+            "text": "ItineraryCreate accepts quoted_total_price and ignores unknown fields. Fix: remove the field and reject undefined request fields with HTTP 422."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "booking_system_backend/schemas.py"
+                },
+                "region": {
+                  "startLine": 113
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "ASVS-V11.1.4",
+          "level": "warning",
+          "message": {
+            "text": "A user can create any number of held itineraries. Fix: limit each user to 3 held itineraries within the hold duration and return HTTP 429."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "booking_system_backend/services/itinerary.py"
+                },
+                "region": {
+                  "startLine": 158
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
